@@ -277,16 +277,44 @@
                 </div>
             </div>
             <div id="section-6">
-                <div class="s5">
-                    <table style="width: 100%">
+                <div class="s6">
+                    <table style="width: 100%" id="s6table">
                         <thead>
                             <tr>
-                                <th rowspan="2">1</th>
-                                <th>2</th>
-                                <th rowspan="2">3</th>
+                                <th rowspan="2">
+                                    <p>Through BANK TRANSFER</p>
+                                    <div>
+                                        <p>Account Number:</p>
+                                        <p>1250681919</p>
+                                    </div>
+                                    <div>
+                                        <p>Bank Name:</p>
+                                        <p>Chinabank Corporation</p>
+                                    </div>
+                                </th>
+                                <th>
+                                    <p>Through GCash:</p>
+                                    <div>
+                                        <p>0900-000-000</p>
+                                        <p>Juan Dela Cruz</p>
+                                    </div>
+                                </th>
+                                <th rowspan="2">
+                                    <div>
+                                        <p>Due Date</p>
+                                        <p>on or before 4 March 2024</p>
+                                    </div>
+                                    <div>
+                                        <p>Please Pay</p>
+                                        <p>₱8,000.00</p>
+                                    </div>
+                                </th>
                             </tr>
                             <tr>
-                                <th>1</th>
+                                <th>
+                                    <p>Pay at our Station:</p>
+                                    <p>#140 Barangay Parian, Calamba City,Laguna</p>
+                                </th>
                                 
                             </tr>
                         </thead>
