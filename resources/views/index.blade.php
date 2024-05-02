@@ -275,7 +275,23 @@
                 <div class="s5">
                     <h1>You can pay your bills at</h1>
                 </div>
-                
+            </div>
+            <div id="section-6">
+                <div class="s5">
+                    <table style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">1</th>
+                                <th>2</th>
+                                <th rowspan="2">3</th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
