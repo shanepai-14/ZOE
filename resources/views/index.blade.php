@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>ZOE</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- font awesome --}}
@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
-   
-    <link rel="stylesheet" href="{{ asset('css/pdf.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/print.css') }}">
 </head>
 
 <body class="">
 
 
-    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+    <nav class="bg-white shadow border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
@@ -47,7 +47,7 @@
                             class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
                             aria-current="page">Home</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
                             class="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Dropdown
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -128,209 +128,483 @@
                     <li>
                         <a href="#" id="printButton"
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Print</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
     </nav>
 
-    {{-- printing --}}
+    {{-- table --}}
 
-    <div class="content">
-        <div class="wrapper">
-            <div id="header">
-                <table>
-                    <thead>
-                        <tr>
-                            <td id="logo">
-                                {{-- <div id="img"> --}}
-                                    <img src="{{ asset('images/logo.jpg') }}" alt="">
+    <div class="p-10">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="flex justify-between items-center px-2">
+                <div class="pb-4 bg-white dark:bg-gray-900">
+                    {{-- <label for="table-search" class="sr-only">Search</label>
+                    <div class="relative mt-1">
+                        <div
+                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="table-search"
+                            class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search for items">
+                    </div> --}}
+                    <h1 class="font-bold tracking-wider text-slate-800">Available Account</h1>
+                </div>
+                <div>
+                    <a href="#" id="addNew"
+                        class="bg-blue-500 hover:bg-blue-700 p-2 rounded-md text-white">+ New</a>
+                </div>
+            </div>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Contract No.
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Account Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Position
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Company
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Address
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Schedule of Broadcast
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($accounts as $account)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $account->contract_no }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $account->name }}
                             </td>
-                            <td id="logo2">
-                                <p id="p1">DZJV 1458</p>
-                                <p id="p2">RADYO</p>
-                                <p id="p3">CALABARZON</p>
-                                <p id="p4">address here dwadaw</p>
+                            <td class="px-6 py-4">
+                                {{ $account->position }}
                             </td>
-                            <td id="icons">
-                                <p><i class="fa-solid fa-location-dot"></i> #143 Barangay Parian, Calamba City, Laguna.</p>
-                                <p><i class="fa-solid fa-envelope"></i> radyocalabarzon@dzjv.com.ph</p>
-                                <p><i class="fa-solid fa-phone"></i> (0906)468-114 / (0906)682-1336</p>
+                            <td class="px-6 py-4">
+                                {{ $account->company }}
                             </td>
-                            <td id="title">
-                                <h1>STATEMENT OF</h1>
-                                <h1>ACCOUNT</h1>
+                            <td class="px-6 py-4">
+                                {{ $account->address }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $account->schedule_of_broadcast }}
+                            </td>
+                            <td class="px-6 py-4 flex gap-2">
+                                <a href="#" data-id="{{ $account->id }}"
+                                    class="openPrint font-medium text-blue-600 dark:text-blue-500 hover:underline">Print</a>
+                                <a href="{{ route('edit', $account->id) }}"
+                                    class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <form action="{{ route('delete') }}" method="post">
+                                    @csrf
+                                    <input type="text" value="{{ $account->id }}" name="id" class="hidden">
+                                    <button type="submit"
+                                    class="delete font-medium text-red-600 dark:text-red-500 hover:underline hover:cursor-pointer">Delete</button>
+                                </form>
+                                <a data-id="{{ $account->id }}"
+                                    class="openPayment font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer">Payment</a>
                             </td>
                         </tr>
-                    </thead>
-                </table>
-    
-            </div>
-            <div class="date">
-                <p>Date: <span id="d">04 March 2024</span></p>
-            </div>
+                    @endforeach
 
-            <div id="section-2">
-                <div id="s-2-a">
-                    <h1 id="s-title">ACCOUNT DETAILS</h1>
-                    <div id="ad-1" class="ad-content-gray">
-                        Contract No.
-                    </div>
-                    <div id="ad-2" class="ad-content">
-                        20202-123
-                    </div>
-                    <div id="ad-3" class="ad-content-gray">
-                        Account Holder
-                    </div>
-                    <div id="ad-4" class="ad-content">
-                        <p>PTR. JANE DOE</p>
-                        <p>District Pastor</p>
-                        <p>Jesus is Lord Church</p>
-                        <p>Somewhere Laguna</p>
-                    </div>
-                </div>
-                <div id="s-2-b">
-                    <h1 id="s-title">SERVICE DETAILS</h1>
-                    <div id="s2-icons">
-                        <span><i class="fa-solid fa-circle"></i> dwadawd</span>
-                        <span><i class="fa-regular fa-circle"></i> dwadawd</span>
-                        <span><i class="fa-regular fa-circle"></i> dwadawd</span>
-                    </div>
-                    <div class="s2-content">
-                        <span>SUBJECT:</span>
-                        <span id="content-right">dwadwadawdaw</span>
-                    </div>
-                    <div class="s2-content">
-                        <span>SCHEDULED OF BROADCAST:</span>
-                        <span id="content-right">dwadwadawdaw</span>
-                    </div>
-                    <div id="pob">
-                        <span>Period of broadcast</span>
-                    </div>
-                    <div class="s2-content">
-                        <span>START OF BROADCAST:</span>
-                        <span id="content-right">dwadwadawdaw</span>
-                    </div>
-                    <div class="s2-content">
-                        <span>END OF BROADCAST:</span>
-                        <span id="content-right">dwadwadawdaw</span>
-                    </div>
-                    <div id="br">
-                        <span>Billing Rate:</span>
-                        <span>1,000.00</span>
-                    </div>
-                </div>
-            </div>
 
-            <div id="section-3">
-                <div class="s3">
-                    <h1>Recent Payments</h1>
-                    <div id="payments">
-                        <p>26 January 2024 - 4,000.00 (at the station)</p>
-                    </div>
-                </div>
-                <div class="s3">
-                    <h1>Billing and Payment Schedule</h1>
-                    <table id="bps">
-                        <tbody>
-                            @for ($i = 1; $i <= 12; $i++)
-                                @if ($i === 1)
-                                <tr class="bpstr completed">
-                                    <td class="bpstd">{{ $i }}st Billing</td>
-                                    <td class="bpstd">January 5,12,19,26,2024</td>
-                                    <td class="bpstd">4,000.00</td>
-                                </tr>
-                                @elseif ($i <= 3 && $i !== 1)
-                                    <tr class="bpstr pending">
-                                        <td class="bpstd"><i class="fa-solid fa-play"></i> {{ $i }}st Billing</td>
-                                        <td class="bpstd">January 5,12,19,26,2024</td>
-                                        <td class="bpstd">4,000.00</td>
-                                    </tr>
-                                @else
-                                    <tr class="bpstr">
-                                        <td class="bpstd">{{ $i }}st Billing</td>
-                                        <td class="bpstd">January 5,12,19,26,2024</td>
-                                        <td class="bpstd">4,000.00</td>
-                                    </tr>
-                                @endif
-                                
-                            @endfor
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-            <div id="section-4">
-                <div class="s4">
-                    <h1>Notice</h1>
-                    <ul>
-                        <li>Please be reminded that we are bounded by a <b>"Pay Before Broadcast"</b> Policy.</li>
-                        <li>Please priority to pay the scheduled billing.</li>
-                        <li>Please assure that you settle your bill on or before the specified due dates.</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="section-5">
-                <div class="s5">
-                    <h1>You can pay your bills at</h1>
-                </div>
-            </div>
-            <div id="section-6">
-                <div class="s6">
-                    <table style="width: 100%" id="s6table">
+    @php
+        function ordinalSuffix($number)
+        {
+            if ($number % 100 >= 11 && $number % 100 <= 13) {
+                return $number . 'th';
+            }
+            switch ($number % 10) {
+                case 1:
+                    return $number . 'st';
+                case 2:
+                    return $number . 'nd';
+                case 3:
+                    return $number . 'rd';
+                default:
+                    return $number . 'th';
+            }
+        }
+    @endphp
+
+    {{-- {{ $accounts }} --}}
+    @foreach ($accounts as $item)
+    {{-- {{ $item->payment }} --}}
+        <div class="hidden content-{{ $item->id }}">
+            <div class="wrapper">
+                <div class="header">
+                    <table>
                         <thead>
                             <tr>
-                                <th rowspan="2">
-                                    <p>Through BANK TRANSFER</p>
-                                    <div>
-                                        <p>Account Number:</p>
-                                        <p>1250681919</p>
-                                    </div>
-                                    <div>
-                                        <p>Bank Name:</p>
-                                        <p>Chinabank Corporation</p>
-                                    </div>
-                                </th>
-                                <th>
-                                    <p>Through GCash:</p>
-                                    <div>
-                                        <p>0900-000-000</p>
-                                        <p>Juan Dela Cruz</p>
-                                    </div>
-                                </th>
-                                <th rowspan="2">
-                                    <div>
-                                        <p>Due Date</p>
-                                        <p>on or before 4 March 2024</p>
-                                    </div>
-                                    <div>
-                                        <p>Please Pay</p>
-                                        <p>₱8,000.00</p>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <p>Pay at our Station:</p>
-                                    <p>#140 Barangay Parian, Calamba City,Laguna</p>
-                                </th>
-                                
+                                <td class="logo">
+                                    {{-- <div id="img"> --}}
+                                    <img src="{{ asset('images/logo.jpg') }}" alt="">
+                                </td>
+                                <td class="logo2">
+                                    <p class="p1">DZJV 1458</p>
+                                    <p class="p2">RADYO</p>
+                                    <p class="p3">CALABARZON</p>
+                                    <p class="p4">KAAKIBAT NG DIYOS, PARA SA BAYAN</p>
+                                </td>
+                                <td class="icons">
+                                    <p><i class="fa-solid fa-location-dot"></i> #143 Barangay Parian, Calamba City,
+                                        Laguna.</p>
+                                    <p><i class="fa-solid fa-envelope"></i> radyocalabarzon@dzjv.com.ph</p>
+                                    <p><i class="fa-solid fa-phone"></i> (0906)468-114 / (0906)682-1336</p>
+                                </td>
+                                <td class="title">
+                                    <h1>STATEMENT OF</h1>
+                                    <h1>ACCOUNT</h1>
+                                </td>
                             </tr>
                         </thead>
                     </table>
+
+                </div>
+                <div class="date">
+                    <p>Date: <span
+                            class="d">{{ \Carbon\Carbon::parse($item->created_at)->formatLocalized('%d %B %Y') }}</span>
+                    </p>
+                </div>
+
+                <div class="section-2">
+                    <div class="s-2-a">
+                        <h1 class="s-title">ACCOUNT DETAILS</h1>
+                        <div class="ad-1" class="ad-content-gray">
+                            Contract No.
+                        </div>
+                        <div class="ad-2" class="ad-content">
+                            {{ $item->contract_no }}
+                        </div>
+                        <div class="ad-3" class="ad-content-gray">
+                            Account Holder
+                        </div>
+                        <div class="ad-4" class="ad-content">
+                            <p>{{ $item->name }}</p>
+                            <p>{{ $item->position }}</p>
+                            <p>{{ $item->company }}</p>
+                            <p>{{ $item->address }}</p>
+                        </div>
+                    </div>
+                    <div class="s-2-b">
+                        <h1 class="s-title">SERVICE DETAILS</h1>
+                        <div class="s2-icons">
+
+                            @if ($item->service_details === 0)
+                                <span><i class="fa-solid fa-circle"></i> Blocktime Programming</span>
+                            @else
+                                <span><i class="fa-regular fa-circle"></i> Blocktime Programming</span>
+                            @endif
+                            @if ($item->service_details === 1)
+                                <span><i class="fa-solid fa-circle"></i> Radio Advertisement</span>
+                            @else
+                                <span><i class="fa-regular fa-circle"></i> Radio Advertisement</span>
+                            @endif
+                            @if ($item->service_details === 2)
+                                <span><i class="fa-solid fa-circle"></i> Others</span>
+                            @else
+                                <span><i class="fa-regular fa-circle"></i> Others</span>
+                            @endif
+
+                        </div>
+                        <div class="s2-content">
+                            <span>SUBJECT:</span>
+                            <span class="content-right">{{ $item->subject }}</span>
+                        </div>
+                        <div class="s2-content">
+                            <span>SCHEDULED OF BROADCAST:</span>
+                            <span class="content-right">{{ $item->schedule_of_broadcast }}</span>
+                        </div>
+                        <div class="pob">
+                            <span>Period of broadcast</span>
+                        </div>
+                        <div class="s2-content">
+                            <span>START OF BROADCAST:</span>
+                            <span
+                                class="content-right">{{ \Carbon\Carbon::parse($item->start_of_broadcast)->formatLocalized('%d %B %Y') }}</span>
+                        </div>
+                        <div class="s2-content">
+                            <span>END OF BROADCAST:</span>
+                            <span
+                                class="content-right">{{ \Carbon\Carbon::parse($item->end_of_broadcast)->formatLocalized('%d %B %Y') }}</span>
+                        </div>
+                        <div class="br">
+                            <span>Billing Rate:</span>
+                            <span>{{ $item->billing_rate }}.00</span>
+                        </div>
+                    </div>
+                </div>
+                {{-- {{ $accounts }} --}}
+                <div class="section-3">
+                    <div class="s3">
+                        <h1>Recent Payments</h1>
+                        <div class="payments">
+                            @php
+                                $rmonthCollection = [];
+                            @endphp
+                            {{-- {{ count($item->payment) }} --}}
+                            @if (count($item->payment) > 0)
+                                @foreach ($item->payment as $p)
+                                    @php
+                                        $rdate = \Carbon\Carbon::parse($p->date)->formatLocalized('%d %B %Y');
+                                        $recentDate = explode(' ', $rdate);
+                                        $recentMonth = $recentDate[1];
+                                        array_push($rmonthCollection, $recentMonth);
+                                    @endphp
+                                    <p>{{ $rdate }} - {{ $p->ammount }}.00 ({{ $p->method }})</p>
+                                @endforeach
+                            @else
+                                <p style="padding-left: 10px; color:red;">no payment's made.</p>
+                            @endif
+                            
+                        </div>
+                    </div>
+                    <div class="s3">
+                        <h1>Billing and Payment Schedule</h1>
+                        <table class="bps">
+                            <tbody>
+                                @php
+                                    $sdate = \Carbon\Carbon::parse($item->start_of_broadcast)->formatLocalized(
+                                        '%d %B %Y',
+                                    );
+                                    $edate = \Carbon\Carbon::parse($item->end_of_broadcast)->formatLocalized(
+                                        '%d %B %Y',
+                                    );
+                                    $tdate = \Carbon\Carbon::parse($item->created_at)->formatLocalized('%d %B %Y');
+                                    // $billingRate =
+                                    $billingDate = explode(' ', $sdate);
+                                    $billingEndDate = explode(' ', $edate);
+                                    $todayDate = explode(' ', $tdate);
+                                    $days = [];
+                                    $tempday = 0;
+                                    $month = $billingDate[1];
+                                    $monthString = [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                        'August',
+                                        'September',
+                                        'October',
+                                        'November',
+                                        'December',
+                                    ];
+                                    $monthStringDays = [
+                                        '5,12,19,26',
+                                        '2,9,16,23',
+                                        '1,8,15,22',
+                                        '5,12,19,26',
+                                        '3,10,17,24,31',
+                                        '7,14,21,28',
+                                        '5,12,19,26',
+                                        '2,9,16,23,30',
+                                        '6,13,20,27',
+                                        '4,11,18,25',
+                                        '1,8,15,22,29',
+                                        '6,13,20,27',
+                                    ];
+                                    $year = $billingDate[2];
+
+                                    $skey = 0;
+                                    $ekey = 0;
+                                    $tkey = 0;
+                                    $rkey = [];
+
+                                    $totalDueDate = 0;
+                                    array_push($days, $billingDate[0]);
+                                @endphp
+                                @for ($i = 0; $i <= 2; $i++)
+                                    {{-- // Push data into the array --}}
+                                    @php
+                                        $tempday = $days[$i] + 7;
+                                        // Push data into the array
+                                        array_push($days, $tempday);
+                                    @endphp
+                                @endfor
+
+                                @foreach ($monthString as $key => $val)
+                                    @if ($val === $month)
+                                        @php
+                                            $skey = $key + 1;
+                                        @endphp
+                                    @endif
+                                    @if ($val === $billingEndDate[1])
+                                        @php
+                                            $ekey = $key + 1;
+                                        @endphp
+                                    @endif
+                                    @if ($val === $todayDate[1])
+                                        @php
+                                            $tkey = $key + 1;
+                                        @endphp
+                                    @endif
+                                    @if (count($rmonthCollection) && in_array($val, $rmonthCollection))
+                                    @php
+                                        $rkey[] = $key + 1;
+                                        // print_r($rkey);
+                                     @endphp
+                                    @endif
+                                @endforeach
+
+
+
+                                {{-- {{ $skey }} {{ $ekey }} --}}
+                                @for ($i = $skey; $i <= $ekey; $i++)
+                                    @if (in_array($i, $rkey))
+                                        <tr class="bpstr completed">
+                                            <td class="bpstd">{{ ordinalSuffix($i) }} Billing</td>
+                                            <td class="bpstd">{{ $monthString[$i - 1] }} {{ $monthStringDays[$i - 1] }}
+                                                {{ $year }}</td>
+                                            <td class="bpstd">{{ intval($item->billing_rate) * 4 }}.00</td>
+                                        </tr>
+                                    @elseif ($i !== 1 && $i <= $tkey)
+                                        <tr class="bpstr pending">
+                                            <td class="bpstd"><i class="fa-solid fa-play"></i>
+                                                {{ ordinalSuffix($i) }} Billing</td>
+                                            <td class="bpstd">{{ $monthString[$i - 1] }} {{ $monthStringDays[$i - 1] }}
+                                                {{ $year }}</td>
+                                            <td class="bpstd">{{ intval($item->billing_rate) * 4 }}.00</td>
+                                        </tr>
+                                        @php
+                                            $totalDueDate += intval($item->billing_rate) * 4;
+                                        @endphp
+                                    @else
+                                        <tr class="bpstr">
+                                            <td class="bpstd">{{ ordinalSuffix($i) }} Billing</td>
+                                            <td class="bpstd">{{ $monthString[$i - 1] }} {{ $monthStringDays[$i - 1] }}
+                                                {{ $year }}</td>
+                                            <td class="bpstd">{{ intval($item->billing_rate) * 4 }}.00</td>
+                                        </tr>
+                                    @endif
+                                @endfor
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-4">
+                    <div class="s4">
+                        <h1>Notice</h1>
+                        <ul>
+                            <li>Please be reminded that we are bounded by a <b>"Pay Before Broadcast"</b> Policy.</li>
+                            <li>Please priority to pay the scheduled billing.</li>
+                            <li>Please assure that you settle your bill on or before the specified due dates.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="section-5">
+                    <div class="s5">
+                        <h1>You can pay your bills at</h1>
+                    </div>
+                </div>
+                <div class="section-6">
+                    <div class="s6">
+                        <table style="width: 100%" class="s6table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="background-color: rgb(202, 202, 202);">
+                                        <p style="text-decoration: underline;">Through BANK TRANSFER</p>
+                                        <div>
+                                            <p>Account Number:</p>
+                                            <p>1250681919</p>
+                                        </div>
+                                        <div>
+                                            <p>Bank Name:</p>
+                                            <p>Chinabank Corporation</p>
+                                        </div>
+                                    </th>
+                                    <th style="background-color: rgb(202, 202, 202);">
+                                        <p style="text-decoration: underline;">Through GCash:</p>
+                                        <div>
+                                            <p>0900-000-000</p>
+                                            <p>Juan Dela Cruz</p>
+                                        </div>
+                                    </th>
+                                    <th rowspan="2">
+                                        <div style="text-align: left; margin-bottom:5px;">
+                                            <p
+                                                style="color: rgba(0, 162, 255, 0.925); font-weight:700; font-style: italic;">
+                                                Due Date</p>
+                                            <p style="margin-top: -15px;">on or before <b>{{ $tdate }}</b></p>
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <p style="color: rgba(0, 162, 255, 0.925); font-weight:700;">Please Pay</p>
+                                            <p
+                                                style="color: rgba(0, 162, 255, 0.925); font-weight:700; font-size:32px;margin-top: -20px;">
+                                                ₱{{ $totalDueDate }}.00</p>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: rgb(202, 202, 202);">
+                                        <p style="text-decoration: underline;">Pay at our Station:</p>
+                                        <p>#140 Barangay Parian, Calamba City,Laguna</p>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    @endforeach
 
+    @include('popup.payment')
+    @include('popup.form')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#printButton').click(function() {
+            $('.openPayment').click(function(){
+                var id = $(this).data('id');
+                // alert(id)
+                $('#p_id').val(parseInt(id))
+                $('#paymentBackground').removeClass('hidden')
+                $('#paymentContainer').removeClass('hidden')
+            })
+            $('#closeBtn').click(function() {
+                $('#modalBackground').addClass('hidden')
+                $('#modalContainer').addClass('hidden')
+            })
+            $('#addNew').click(function() {
+                $('#modalBackground').removeClass('hidden')
+                $('#modalContainer').removeClass('hidden')
+            })
+
+            $('.openPrint').click(function() {
+                var id = $(this).data('id')
                 // Clone the content div
-                var $printContent = $('.content').clone();
+                var $printContent = $(`.content-${id}`).clone();
 
                 // Create a new window and append the cloned content
                 var $printWindow = window.open('', '_blank');
@@ -358,7 +632,7 @@
                 setTimeout(() => {
                     $printWindow.print();
                 }, 1000);
-               
+
             })
         })
     </script>

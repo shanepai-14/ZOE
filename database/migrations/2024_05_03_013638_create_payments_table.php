@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('p_d_f_s', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('path');
+            $table->foreignId('account_id')->constrained();
+            $table->date('date');
+            $table->bigInteger('ammount');
+            $table->text('method');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('p_d_f_s');
+        Schema::dropIfExists('payments');
     }
 };
