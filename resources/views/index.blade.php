@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
 
     <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+    <style>
+        #menu-toggle:checked + #menu {
+   display: block;
+}
+    </style>
 </head>
 
 <body class="">
@@ -46,6 +51,19 @@
                         <a href="#"
                             class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
                             aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor" id="userdropdown">
+                            <img class="rounded-full w-10 h-10 border-2 border-transparent hover:border-blue-400 ignore-body-click" src="{{ asset('images/user.png')}}" alt="avatar">
+                          </a>
+                            <div id="usermenu" class="absolute lg:mt-14 pt-1 z-40 left-0 lg:left-auto lg:right-12 lg:top-0 invisible lg:w-auto w-full">
+                              <div class="bg-white shadow-xl lg:px-8 px-6 lg:py-4 pb-4 pt-0 rounded lg:mr-3 rounded-t-none">
+                                {{-- <a href="/settings" class="pb-2 block text-gray-600 hover:text-gray-900 ignore-body-click">Settings</a> --}}
+                                <a href="/logout" class="block text-gray-600 hover:text-gray-900 ignore-body-click">Logout</a>
+                              </div>
+                            </div>
+                      
+                         
                     </li>
                     {{-- <li>
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
@@ -193,7 +211,7 @@
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $account->contract_no }}
                             </th>
                             <td class="px-6 py-4">
@@ -585,6 +603,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            var userDropDownVisible = false;
+
+document.body.addEventListener("click", function (e) {
+   if(e.target.id != "usermenu" && !e.target.classList.contains('ignore-body-click') && userDropDownVisible){
+       document.getElementById('usermenu').classList.add('invisible');
+       userDropDownVisible = false;
+   }
+});
+
+
+document.getElementById('userdropdown').addEventListener('click', function(){
+   if(document.getElementById('usermenu').classList.contains('invisible')){
+       document.getElementById('usermenu').classList.remove('invisible');
+       userDropDownVisible = true;
+   } else {
+       document.getElementById('usermenu').classList.add('invisible');
+       userDropDownVisible = false;
+   }
+});
+
+// javascript functionality to preview photo file upload
+
+window.loadFile = function(event) {
+   var reader = new FileReader();
+   reader.onload = function(){
+       var output = document.getElementById('photo');
+       if (event.target.files[0].type.match('image.*')) {
+           output.src = reader.result;
+       } else {
+           event.target.value = '';
+           alert('please select a valid image');   
+       }
+   };
+   reader.readAsDataURL(event.target.files[0]);
+ };
+
+
+
+
             $('.openPayment').click(function(){
                 var id = $(this).data('id');
                 // alert(id)

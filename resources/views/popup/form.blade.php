@@ -13,7 +13,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                     <div class="mb-5">
                         <label for="cn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contract No.</label>
-                        <input type="text" name="contract_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345-121" required />
+                        <input type="text" name="contract_no" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345-121" value="{{$contractNumber}}" readonly/>
                     </div>
                     <div class="mb-5">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Name.</label>
@@ -40,7 +40,7 @@
                             <option value="">Choose a Service</option>
                             <option value="0">Blocktime Programming</option>
                             <option value="1">Radio Advertisement</option>
-                            <option value="FR">Others</option>
+                            <option value="2">Others</option>
                         </select>
                     </div>
                 </div>
