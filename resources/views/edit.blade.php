@@ -43,9 +43,22 @@
                 <ul
                     class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="#"
+                        <a href="/home"
                             class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
                             aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor" id="userdropdown">
+                            <img class="rounded-full w-10 h-10 border-2 border-transparent hover:border-blue-400 ignore-body-click" src="{{ asset('images/user.png')}}" alt="avatar">
+                          </a>
+                            <div id="usermenu" class="absolute lg:mt-14 pt-1 z-40 left-0 lg:left-auto lg:right-12 lg:top-0 invisible lg:w-auto w-full">
+                              <div class="bg-white shadow-xl lg:px-8 px-6 lg:py-4 pb-4 pt-0 rounded lg:mr-3 rounded-t-none">
+                                {{-- <a href="/settings" class="pb-2 block text-gray-600 hover:text-gray-900 ignore-body-click">Settings</a> --}}
+                                <a href="/logout" class="block text-gray-600 hover:text-gray-900 ignore-body-click">Logout</a>
+                              </div>
+                            </div>
+                      
+                         
                     </li>
                     
                 </ul>
@@ -139,7 +152,7 @@
             
             
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            <a href="{{ route('index') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancel</a>
+            <a href="{{ route('home') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancel</a>
         </form>
     </div>
 
@@ -147,6 +160,27 @@
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+         var userDropDownVisible = false;
+
+document.body.addEventListener("click", function (e) {
+   if(e.target.id != "usermenu" && !e.target.classList.contains('ignore-body-click') && userDropDownVisible){
+       document.getElementById('usermenu').classList.add('invisible');
+       userDropDownVisible = false;
+   }
+});
+
+
+document.getElementById('userdropdown').addEventListener('click', function(){
+   if(document.getElementById('usermenu').classList.contains('invisible')){
+       document.getElementById('usermenu').classList.remove('invisible');
+       userDropDownVisible = true;
+   } else {
+       document.getElementById('usermenu').classList.add('invisible');
+       userDropDownVisible = false;
+   }
+});
+    </script>
     
 </body>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Payment;
+use App\Models\CompanyBillingDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Svg\Tag\Rect;
@@ -14,7 +15,8 @@ class AccountController extends Controller
     {
         $contractNumber =  Account::generateContractNumber();
         $accounts = Account::with('payment')->get();
-        return view('index', compact('accounts', 'contractNumber'));
+        $companyDetails = CompanyBillingDetail::first();
+        return view('index', compact('accounts', 'contractNumber','companyDetails'));
     }
 
     public function store(Request $request)
@@ -36,7 +38,38 @@ class AccountController extends Controller
 
         return Redirect::route('home')->with('success', 'New Account successfully added');
     }
+    public function storeCompanyDetails(Request $request)
+    {
+          
+        $first = CompanyBillingDetail::first();
+        if($first){
+            $first->update([
+                'account_number' => request('account_number'),
+                'account_name' => request('account_name'),
+                'bank_name' => request('bank_name'),
+                'gcash_number' => request('gcash_number'),
+                'gcash_name' => request('gcash_name'),
+                'company_email' => request('company_email'),
+                'company_number1' => request('company_number1'),
+                'company_number2' => request('company_number2'),
+                'company_address' => request('company_address'),
+            ]);
+            return Redirect::route('home')->with('success', 'Updated Company Details'); 
+        }
 
+        $detail = CompanyBillingDetail::create([
+            'account_number' => request('account_number'),
+            'account_name' => request('account_name'),
+            'bank_name' => request('bank_name'),
+            'gcash_number' => request('gcash_number'),
+            'gcash_name' => request('gcash_name'),
+            'company_email' => request('company_email'),
+            'company_number1' => request('company_number1'),
+            'company_number2' => request('company_number2'),
+            'company_address' => request('company_address'),
+        ]);
+        return Redirect::route('home')->with('success', 'Updated Company Details');
+    }
     public function delete(Request $request)
     {
         $id = $request->input('id');

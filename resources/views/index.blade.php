@@ -58,7 +58,7 @@
                           </a>
                             <div id="usermenu" class="absolute lg:mt-14 pt-1 z-40 left-0 lg:left-auto lg:right-12 lg:top-0 invisible lg:w-auto w-full">
                               <div class="bg-white shadow-xl lg:px-8 px-6 lg:py-4 pb-4 pt-0 rounded lg:mr-3 rounded-t-none">
-                                {{-- <a href="/settings" class="pb-2 block text-gray-600 hover:text-gray-900 ignore-body-click">Settings</a> --}}
+                                <a href="#" id="company_btn" class="pb-2 block text-gray-600 hover:text-gray-900 ignore-body-click">Company Details</a>
                                 <a href="/logout" class="block text-gray-600 hover:text-gray-900 ignore-body-click">Logout</a>
                               </div>
                             </div>
@@ -291,10 +291,9 @@
                                     <p class="p4">KAAKIBAT NG DIYOS, PARA SA BAYAN</p>
                                 </td>
                                 <td class="icons">
-                                    <p><i class="fa-solid fa-location-dot"></i> #143 Barangay Parian, Calamba City,
-                                        Laguna.</p>
-                                    <p><i class="fa-solid fa-envelope"></i> radyocalabarzon@dzjv.com.ph</p>
-                                    <p><i class="fa-solid fa-phone"></i> (0906)468-114 / (0906)682-1336</p>
+                                    <p><i class="fa-solid fa-location-dot"></i> {{$companyDetails->company_address}}</p>
+                                    <p><i class="fa-solid fa-envelope"></i> {{$companyDetails->company_email}}</p>
+                                    <p><i class="fa-solid fa-phone"></i> {{$companyDetails->company_number1}} / {{$companyDetails->company_number2}}</p>
                                 </td>
                                 <td class="title">
                                     <h1>STATEMENT OF</h1>
@@ -554,18 +553,18 @@
                                         <p style="text-decoration: underline;">Through BANK TRANSFER</p>
                                         <div>
                                             <p>Account Number:</p>
-                                            <p>1250681919</p>
+                                            <p>{{$companyDetails->account_number}}</p>
                                         </div>
                                         <div>
                                             <p>Bank Name:</p>
-                                            <p>Chinabank Corporation</p>
+                                            <p>{{$companyDetails->bank_name}}</p>
                                         </div>
                                     </th>
                                     <th style="background-color: rgb(202, 202, 202);">
                                         <p style="text-decoration: underline;">Through GCash:</p>
                                         <div>
-                                            <p>0900-000-000</p>
-                                            <p>Juan Dela Cruz</p>
+                                            <p>{{$companyDetails->gcash_number}}</p>
+                                            <p>{{$companyDetails->gcash_name}}</p>
                                         </div>
                                     </th>
                                     <th rowspan="2">
@@ -586,7 +585,7 @@
                                 <tr>
                                     <th style="background-color: rgb(202, 202, 202);">
                                         <p style="text-decoration: underline;">Pay at our Station:</p>
-                                        <p>#140 Barangay Parian, Calamba City,Laguna</p>
+                                        <p>{{$companyDetails->company_address}}</p>
                                     </th>
 
                                 </tr>
@@ -597,7 +596,60 @@
             </div>
         </div>
     @endforeach
+    <div id="companyDetails" class="fixed top-0 left-0 w-full h-full bg-black opacity-50 hidden"></div>
 
+    <!-- Modal Container -->
+    <div id="companyContainer" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  rounded shadow-lg w-[800px] hidden">
+        <div class="p-4  bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <h3 class="mb-4 text-xl font-semibold dark:text-white">Company Details</h3>
+            <form action="{{ route('storeCompanyDetails')}}" method="POST">
+                @csrf
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input type="email" name="company_email" id="company_email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="company@gmail.com" value="{{$companyDetails->company_email ?? ''}}" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone #1</label>
+                        <input type="number" value="{{ $companyDetails->company_number1 ?? ""}}" name="company_number1" id="company_number1" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. 0912 345 6789" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone #2</label>
+                        <input type="number" value="{{ $companyDetails->company_number2?? ""}}" name="company_number2" id="company_number2" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. 0912 345 6789" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Number</label>
+                        <input type="number"value="{{ $companyDetails->account_number?? ""}}" name="account_number" id="account_number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Name</label>
+                        <input type="text" value="{{ $companyDetails->account_name?? ""}}" name="account_name" id="account_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bank Name</label>
+                        <input type="text" value="{{ $companyDetails->bank_name?? ""}}" name="bank_name" id="bank_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gcash Number</label>
+                        <input type="number" value="{{ $companyDetails->gcash_number?? ""}}" name="gcash_number" id="gcash_number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. 0912 345 6789" required="">
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gcash Name</label>
+                        <input type="text" value="{{ $companyDetails->gcash_name?? ""}}" name="gcash_name" id="gcash_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="15/08/1990" required="">
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="organization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Address</label>
+                       <textarea name="company_address" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" id="" cols="30" rows="5">{{ $companyDetails->company_address?? ""}}
+                       </textarea>
+                    </div>
+                  
+                    <div class="col-span-6 sm:col-full">
+                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     @include('popup.payment')
     @include('popup.form')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -640,7 +692,13 @@ window.loadFile = function(event) {
  };
 
 
-
+ $('#company_btn').click(function(){
+                var id = $(this).data('id');
+                // alert(id)
+                // $('#p_id').val(parseInt(id))
+                $('#companyDetails').removeClass('hidden')
+                $('#companyContainer').removeClass('hidden')
+            })
 
             $('.openPayment').click(function(){
                 var id = $(this).data('id');

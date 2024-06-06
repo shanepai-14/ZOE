@@ -20,10 +20,12 @@ Route::post('/login-user', [LoginController::class, 'login'])->name('login-user'
 Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/home', [App\Http\Controllers\AccountController::class, 'index'])->name('home');
-Route::get('/edit/{id}', [App\Http\Controllers\AccountController::class, 'edit'])->name('edit');
-Route::post('/store', [App\Http\Controllers\AccountController::class, 'store'])->name('store');
-Route::post('/delete', [App\Http\Controllers\AccountController::class, 'delete'])->name('delete');
-Route::post('/update', [App\Http\Controllers\AccountController::class, 'update'])->name('update');
-Route::post('/payment', [App\Http\Controllers\AccountController::class, 'payment'])->name('payment');
+Route::get('/home', [AccountController::class, 'index'])->name('home');
+Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('edit');
+Route::post('/store', [AccountController::class, 'store'])->name('store');
+Route::post('/delete', [AccountController::class, 'delete'])->name('delete');
+Route::post('/update', [AccountController::class, 'update'])->name('update');
+Route::post('/payment', [AccountController::class, 'payment'])->name('payment');
+Route::post('/storeCompany', [AccountController::class, 'storeCompanyDetails'])->name('storeCompanyDetails');
+
 });
