@@ -280,10 +280,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <td class="logo">
-                                    {{-- <div id="img"> --}}
-                                    <img src="{{ asset('images/logo.jpg') }}" alt="">
-                                </td>
+                                {{-- <td class="logo">
+                       
+                                    <img src="{{ asset('images/logocrop.jpg') }}" alt="">
+                                </td>  --}}
                                 <td class="logo2">
                                     <p class="p1">DZJV 1458</p>
                                     <p class="p2">RADYO</p>
@@ -313,20 +313,20 @@
                 <div class="section-2">
                     <div class="s-2-a">
                         <h1 class="s-title">ACCOUNT DETAILS</h1>
-                        <div class="ad-1" class="ad-content-gray">
+                        <div class="ad-1" >
                             Contract No.
                         </div>
-                        <div class="ad-2" class="ad-content">
+                        <div class="ad-2">
                             {{ $item->contract_no }}
                         </div>
-                        <div class="ad-3" class="ad-content-gray">
+                        <div class="ad-3" >
                             Account Holder
                         </div>
-                        <div class="ad-4" class="ad-content">
-                            <p>{{ $item->name }}</p>
-                            <p>{{ $item->position }}</p>
-                            <p>{{ $item->company }}</p>
-                            <p>{{ $item->address }}</p>
+                        <div class="ad-4 " style="display:flex; flex-direction:column; justify-content:center; align-item:center">
+                            <p style="margin-bottom: 3px; margin-top:0">{{ $item->name }}</p>
+                            <p style="margin-bottom: 3px; margin-top:0">{{ $item->position }}</p>
+                            <p style="margin-bottom: 3px; margin-top:0">{{ $item->company }}</p>
+                            <p style=" margin-top:0">{{ $item->address }}</p>
                         </div>
                     </div>
                     <div class="s-2-b">
@@ -380,7 +380,7 @@
                 {{-- {{ $accounts }} --}}
                 <div class="section-3">
                     <div class="s3">
-                        <h1>Recent Payments</h1>
+                        <h1 style="margin-bottom: 3px">Recent Payments</h1>
                         <div class="payments">
                             @php
                                 $rmonthCollection = [];
@@ -394,7 +394,7 @@
                                         $recentMonth = $recentDate[1];
                                         array_push($rmonthCollection, $recentMonth);
                                     @endphp
-                                    <p>{{ $rdate }} - {{ $p->ammount }}.00 ({{ $p->method }})</p>
+                                    <p style="margin-bottom: 3px; margin-top:0px"><i>{{ $rdate }}</i> - <b>{{ $p->ammount }}.00 ({{ $p->method }})</b></p>
                                 @endforeach
                             @else
                                 <p style="padding-left: 10px; color:red;">no payment's made.</p>
@@ -403,7 +403,7 @@
                         </div>
                     </div>
                     <div class="s3">
-                        <h1>Billing and Payment Schedule</h1>
+                        <h1 style="margin-bottom: 3px">Billing and Payment Schedule</h1>
                         <table class="bps">
                             <tbody>
                                 @php
@@ -550,22 +550,22 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2" style="background-color: rgb(202, 202, 202);">
-                                        <p style="text-decoration: underline;">Through BANK TRANSFER</p>
+                                        <p style="text-decoration: underline; color:#737373">Through BANK TRANSFER</p>
                                         <div>
-                                            <p>Account Number:</p>
-                                            <p>{{$companyDetails->account_number}}</p>
+                                            <p style="text-align: start; color:#737373">Account Number:</p>
+                                            <p style="text-align: start;color:#737373">{{$companyDetails->account_number}}</p>
                                         </div>
                                         <div>
-                                            <p>Bank Name:</p>
-                                            <p>{{$companyDetails->bank_name}}</p>
+                                            <p style="text-align: start;color:#737373">Bank Name:</p>
+                                            <p style="text-align: start;color:#737373">{{$companyDetails->bank_name}}</p>
                                         </div>
                                     </th>
                                     <th style="background-color: rgb(202, 202, 202);">
-                                        <p style="text-decoration: underline;">Through GCash:</p>
+                                        <p style="text-decoration: underline; text-align: start;color:#737373">Through GCash:</p>
                                         <div>
-                                            <p>{{$companyDetails->gcash_number}}</p>
-                                            <p>{{$companyDetails->gcash_name}}</p>
-                                        </div>
+                                            <p style="text-align: start;color:#737373">{{$companyDetails->gcash_number}}</p>
+                                            <p style="text-align: start;color:#737373">{{$companyDetails->gcash_name}}</p>
+                                        </div >
                                     </th>
                                     <th rowspan="2">
                                         <div style="text-align: left; margin-bottom:5px;">
@@ -575,7 +575,7 @@
                                             <p style="margin-top: -15px;">on or before <b>{{ $tdate }}</b></p>
                                         </div>
                                         <div style="text-align: left;">
-                                            <p style="color: rgba(0, 162, 255, 0.925); font-weight:700;">Please Pay</p>
+                                            <p style="color: rgba(0, 162, 255, 0.925); font-weight:700; ">Please Pay</p>
                                             <p
                                                 style="color: rgba(0, 162, 255, 0.925); font-weight:700; font-size:32px;margin-top: -20px;">
                                                 ₱{{ $totalDueDate }}.00</p>
@@ -584,16 +584,21 @@
                                 </tr>
                                 <tr>
                                     <th style="background-color: rgb(202, 202, 202);">
-                                        <p style="text-decoration: underline;">Pay at our Station:</p>
-                                        <p>{{$companyDetails->company_address}}</p>
+                                        <p style="text-decoration: underline;text-align: start;color:#737373">Pay at our Station:</p>
+                                        <p style="text-align: start;color:#737373">{{$companyDetails->company_address}}</p>
                                     </th>
 
                                 </tr>
                             </thead>
                         </table>
+                        <div style="display:flex; justify-content:space-between; background-color: #0054A6; margin-top:10px; padding-left: 6px; padding-right:6px">
+                            <p style="font-size: 11px; color:white">verfied by <b>ADMIN ASST</b>. Checked by <b>STN. MNGR</b></p>
+                            <p style="font-size: 11px; color:white">for any inquires or concerns,email us at <b>{{$companyDetails->company_email}}</b> or contact us at <b>{{$companyDetails->company_number1}}</b></p>
+                          </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     @endforeach
     <div id="companyDetails" class="fixed top-0 left-0 w-full h-full bg-black opacity-50 hidden"></div>
@@ -723,39 +728,86 @@ window.loadFile = function(event) {
                 $('#modalContainer').removeClass('hidden')
             })
 
+            // $('.openPrint').click(function() {
+            //     var id = $(this).data('id')
+            //     // Clone the content div
+            //     var $printContent = $(`.content-${id}`).clone();
+
+            //     // Create a new window and append the cloned content
+            //     var $printWindow = window.open('', '_blank');
+            //     $printWindow.document.open();
+            //     $printWindow.document.write(`<head>
+            //         <meta charset="utf-8">
+            //         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            //         <title>Print</title>
+
+            //         <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-462d1fe84b879d730fe2180b0e0354e0.css?vsn=d">
+            //         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+            //         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+            //         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+            //         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+            //         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+            //         <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+            //         <style>
+                        
+            //             </style>
+            //     </head>
+                
+            //     <body>`);
+            //     $printWindow.document.write($printContent.html());
+            //     $printWindow.document.write('</body></html>');
+            //     $printWindow.document.close();
+
+            //     // Print the new window
+            //     setTimeout(() => {
+            //         $printWindow.print();
+            //     }, 1000);
+
+            // })
             $('.openPrint').click(function() {
-                var id = $(this).data('id')
-                // Clone the content div
-                var $printContent = $(`.content-${id}`).clone();
+    var id = $(this).data('id');
+    // Clone the content div
+    var $printContent = $(`.content-${id}`).clone();
 
-                // Create a new window and append the cloned content
-                var $printWindow = window.open('', '_blank');
-                $printWindow.document.open();
-                $printWindow.document.write(`<head>
-                    <meta charset="utf-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
+    // Create a new pop-up window
+    var popupWindow = window.open("", "_blank", "width=800,height=600,scrollbars=yes");
 
-                    <title>Print</title>
+    // Append the cloned content to the pop-up window
+    popupWindow.document.open();
+    popupWindow.document.write(`<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                    <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-462d1fe84b879d730fe2180b0e0354e0.css?vsn=d">
-                    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-                    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
-                    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
-                    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
-                    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
-                    <link rel="stylesheet" href="./css/print.css">
-                </head>
-                <body>`);
-                $printWindow.document.write($printContent.html());
-                $printWindow.document.write('</body></html>');
-                $printWindow.document.close();
+        <title>Print</title>
 
-                // Print the new window
-                setTimeout(() => {
-                    $printWindow.print();
-                }, 1000);
+        <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-462d1fe84b879d730fe2180b0e0354e0.css?vsn=d">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+        <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+        <style>
+           @media print {
+    body {
+        background-color: rgb(202, 202, 202);
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}
+        </style>
+    </head>
+    <body>`);
+    popupWindow.document.write($printContent.html());
+    popupWindow.document.write('</body></html>');
+    popupWindow.document.close();
 
-            })
+    // Print the pop-up window
+    setTimeout(() => {
+        popupWindow.print();
+    }, 1000);
+});
         })
     </script>
 </body>

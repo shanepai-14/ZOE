@@ -11,7 +11,7 @@
 }
 
 .header {
-    background-color: rgba(0, 162, 255, 0.925);
+    background-color: #0054A6;
     margin: 0;
     padding: 0;
 }
@@ -88,8 +88,12 @@
 .date {
     text-align: right;
 }
+.date p{
+    margin: 0;
+}
 
 .date .d {
+   
     font-weight: 700;
     margin-left: 15px;
 }
@@ -118,20 +122,25 @@
 .ad-1, .ad-2, .ad-3, .ad-4 {
     float: left; /* Float both divs to the left */
     width: 65%; /* Each div takes up 50% of the parent container */
-    background-color: rgb(202, 202, 202);
+   
 }
 .ad-1{
+ 
     width: 35% !important;
     text-align: center;
     font-weight: 700;
     color: white;
     padding: 10px;
+    background-color: rgb(202, 202, 202);
 }
 .ad-2{
     font-weight: 700; 
     padding: 10px;
+    outline: solid 3px rgb(202, 202, 202);
 }
 .ad-4{
+    height: 148px;
+    outline: solid 3px rgb(202, 202, 202);
     font-weight: 700; 
     margin: 0;
     padding-left: 10px;
@@ -140,10 +149,11 @@
     width: 35% !important;
     height: 150px;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 55px;
     font-weight: 700;
     color: white;
     font-size: 16px;
+    background-color: rgb(202, 202, 202);
 }
 
 /* #s-2-a .ad-content-gray{
@@ -269,7 +279,7 @@ th, td {
 
 .completed{
     background-color: rgb(219, 218, 218);
-    color: white;
+    color: #737373;
 }
 
 .pending{
