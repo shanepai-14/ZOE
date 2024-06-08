@@ -22,16 +22,32 @@
         #menu-toggle:checked + #menu {
    display: block;
 }
+
+.bg-login{
+         background-image: url("{{ asset('images/bg_logo.jpg') }}");
+         background-size:cover;
+         background-position: center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-blend-mode: multiply;
+         height: 100vh;
+         width: 100vw;
+         position: fixed;
+         z-index: -2;
+         overflow: hidden;
+         opacity: 0.2;
+     }
+
     </style>
 </head>
 
 <body class="">
-
+   <div class="bg-login"></div>
 
     <nav class="bg-white shadow border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+                <img src="{{ asset('images/logo.jpg')}}" class="h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ZOE</span>
             </a>
             <button data-collapse-toggle="navbar-multi-level" type="button"
@@ -157,7 +173,7 @@
     <div class="p-10">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="flex justify-between items-center px-2">
-                <div class="pb-4 bg-white dark:bg-gray-900">
+                <div class="pb-4  ">
                     {{-- <label for="table-search" class="sr-only">Search</label>
                     <div class="relative mt-1">
                         <div
@@ -280,15 +296,15 @@
                     <table>
                         <thead>
                             <tr>
-                                {{-- <td class="logo">
+                                <td class="logo">
                        
-                                    <img src="{{ asset('images/logocrop.jpg') }}" alt="">
-                                </td>  --}}
+                                    <img src="{{ asset('images/logo.jpg') }}" alt="">
+                                </td> 
                                 <td class="logo2">
-                                    <p class="p1">DZJV 1458</p>
+                                    {{-- <p class="p1">DZJV 1458</p>
                                     <p class="p2">RADYO</p>
                                     <p class="p3">CALABARZON</p>
-                                    <p class="p4">KAAKIBAT NG DIYOS, PARA SA BAYAN</p>
+                                    <p class="p4">KAAKIBAT NG DIYOS, PARA SA BAYAN</p> --}}
                                 </td>
                                 <td class="icons">
                                     <p><i class="fa-solid fa-location-dot"></i> {{$companyDetails->company_address}}</p>
@@ -549,30 +565,34 @@
                         <table style="width: 100%" class="s6table">
                             <thead>
                                 <tr>
-                                    <th rowspan="2" style="background-color: rgb(202, 202, 202);">
-                                        <p style="text-decoration: underline; color:#737373">Through BANK TRANSFER</p>
+                                    <th rowspan="2" style="background-color: rgb(202, 202, 202);border:1px solid rgb(202, 202, 202); padding: 40px 0px 40px 5px">
+                                        <p style="text-decoration: underline; color:#737373;text-align:start">Through BANK TRANSFER</p>
                                         <div>
-                                            <p style="text-align: start; color:#737373">Account Number:</p>
-                                            <p style="text-align: start;color:#737373">{{$companyDetails->account_number}}</p>
+                                            <p style="text-align: start; color:#737373; margin-bottom:0; font-weight: normal;">Account Name:</p>
+                                            <p style="text-align: start;color:#737373;margin-top:0">{{$companyDetails->account_name}}</p>
                                         </div>
                                         <div>
-                                            <p style="text-align: start;color:#737373">Bank Name:</p>
-                                            <p style="text-align: start;color:#737373">{{$companyDetails->bank_name}}</p>
+                                            <p style="text-align: start; color:#737373;margin-bottom:0;font-weight: normal;">Account Number:</p>
+                                            <p style="text-align: start;color:#737373;margin-top:0">{{$companyDetails->account_number}}</p>
+                                        </div>
+                                        <div>
+                                            <p style="text-align: start;color:#737373;margin-bottom:0;font-weight: normal;">Bank Name:</p>
+                                            <p style="text-align: start;color:#737373;margin-top:0">{{$companyDetails->bank_name}}</p>
                                         </div>
                                     </th>
-                                    <th style="background-color: rgb(202, 202, 202);">
+                                    <th style="background-color: rgb(202, 202, 202); border:1px solid rgb(202, 202, 202)">
                                         <p style="text-decoration: underline; text-align: start;color:#737373">Through GCash:</p>
                                         <div>
-                                            <p style="text-align: start;color:#737373">{{$companyDetails->gcash_number}}</p>
-                                            <p style="text-align: start;color:#737373">{{$companyDetails->gcash_name}}</p>
+                                            <p style="text-align: start;color:#737373;margin-bottom:0;">{{$companyDetails->gcash_number}}</p>
+                                            <p style="text-align: start;color:#737373;margin-top:0;font-weight: normal;">{{$companyDetails->gcash_name}}</p>
                                         </div >
                                     </th>
-                                    <th rowspan="2">
+                                    <th rowspan="2" style="border:1px solid rgb(202, 202, 202)">
                                         <div style="text-align: left; margin-bottom:5px;">
                                             <p
                                                 style="color: rgba(0, 162, 255, 0.925); font-weight:700; font-style: italic;">
                                                 Due Date</p>
-                                            <p style="margin-top: -15px;">on or before <b>{{ $tdate }}</b></p>
+                                            <p style="margin-top: -15px;white-space: nowrap;">on or before <b>{{ $tdate }}</b></p>
                                         </div>
                                         <div style="text-align: left;">
                                             <p style="color: rgba(0, 162, 255, 0.925); font-weight:700; ">Please Pay</p>
@@ -583,9 +603,9 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: rgb(202, 202, 202);">
-                                        <p style="text-decoration: underline;text-align: start;color:#737373">Pay at our Station:</p>
-                                        <p style="text-align: start;color:#737373">{{$companyDetails->company_address}}</p>
+                                    <th style="background-color: rgb(202, 202, 202);border:1px solid rgb(202, 202, 202)">
+                                        <p style="text-decoration: underline;text-align: start;color:#737373;margin-bottom:0;">Pay at our Station:</p>
+                                        <p style="text-align: start;color:#737373;margin-top:0;font-weight: normal;">{{$companyDetails->company_address}}</p>
                                     </th>
 
                                 </tr>

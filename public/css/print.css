@@ -33,6 +33,10 @@
     border: 1px solid black;
     width: 15%;
     padding: 0;
+    background-image: url('../images/logocrop.jpg');
+    background-size:100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .logo2 .p1 {
@@ -46,6 +50,7 @@
 .logo2 .p2 {
     font-size: 28px;
     margin-top: -10px;
+    background-color: rgba(0, 162, 255, 0.925);
     font-weight: 700;
     margin: 0;
 }
@@ -53,14 +58,16 @@
 .logo2 .p3 {
     font-size: 18px;
     color: white;
+    background-color: rgba(0, 162, 255, 0.925);
     margin-top: -12px;
     font-weight: 500;
     margin: 0;
 }
 
 .logo2 .p4 {
-    font-size: 8px;
-    color: white;
+    text-align: center;
+    font-size: 6px;
+    color: yellow;
     font-weight: 500;
     background-color: black;
     margin: 0;
